@@ -5,8 +5,15 @@ from flask_jwt_extended import (
   get_jwt_identity,
   JWTManager,
 )
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+CORS(
+  app,
+  origins=["http://localhost:3000"], # TODO: not hardcode
+  supports_credentials=True,
+)
 
 # Configure jwt
 app.config["JWT_SECRET_KEY"] = "secret"
