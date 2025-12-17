@@ -24,12 +24,12 @@ app.register_blueprint(auth_bp)
 
 
 # non auth routes
-@app.route("/status", methods=["GET"])
+@app.route("/auth/status", methods=["GET"])
 def status():
   return jsonify({"status": "ok", "service": "authentication service"}), 200
 
 
-@app.route("/hello", methods=["GET"])
+@app.route("/auth/hello", methods=["GET"])
 def hello():
   return jsonify({"message": "hello", "service": "authentication service"}), 200
 
