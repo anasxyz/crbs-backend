@@ -1,7 +1,7 @@
 package com.example.crbs_booking_service.service;
 
-import com.example.crbs.model.Booking;
-import com.example.crbs.repository.BookingRepository;
+import com.example.crbs_booking_service.model.Booking;
+import com.example.crbs_booking_service.repository.BookingRepository;
 import org.springframework.stereotype.Service;
 
 @Service

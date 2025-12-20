@@ -1,6 +1,6 @@
 package com.example.crbs_booking_service.repository;
 
-import com.example.crbs.model.Booking;
+import com.example.crbs_booking_service.model.Booking;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;

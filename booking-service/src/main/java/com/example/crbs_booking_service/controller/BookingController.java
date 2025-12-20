@@ -1,7 +1,7 @@
 package com.example.crbs_booking_service.repository;
 
-import com.example.crbs.model.Booking;
-import com.example.crbs.service.BookingService;
+import com.example.crbs_booking_service.model.Booking;
+import com.example.crbs_booking_service.service.BookingService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
