@@ -22,6 +22,6 @@ public class BookingController {
 
   @GetMapping
   public String status() {
-    return "Ok";
+    return "Ok\n";
   }
 }
