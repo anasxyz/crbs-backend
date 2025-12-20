@@ -14,7 +14,7 @@ public class BookingController {
     this.bookingService = bookingService;
   }
 
-  // endpoint to create a booking
+  // endpoint to create a booking 
   @PostMapping
   public Booking createBooking(@RequestBody Booking booking) {
     return bookingService.createBooking(booking);
