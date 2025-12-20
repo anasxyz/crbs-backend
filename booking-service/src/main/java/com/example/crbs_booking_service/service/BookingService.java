@@ -1,4 +1,4 @@
-package com.example.crbs.service;
+package com.example.crbs_booking_service.service;
 
 import com.example.crbs.model.Booking;
 import com.example.crbs.repository.BookingRepository;

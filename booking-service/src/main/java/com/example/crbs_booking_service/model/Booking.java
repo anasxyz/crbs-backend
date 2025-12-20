@@ -1,4 +1,4 @@
-package com.example.crbs.model;
+package com.example.crbs_booking_service.model;
 
 import java.time.Instant;
 

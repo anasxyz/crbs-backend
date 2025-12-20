@@ -1,4 +1,4 @@
-package com.example.crbs.repository;
+package com.example.crbs_booking_service.repository;
 
 import com.example.crbs.model.Booking;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
