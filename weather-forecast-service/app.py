@@ -4,6 +4,9 @@ import random
 
 
 def lambda_handler(event, context):
+  # log api gateway event
+  print(f"FULL EVENT: {json.dumps(event)}") 
+
   try:
     body = json.loads(event.get("body", "{}"))
   except json.JSONDecodeError:
