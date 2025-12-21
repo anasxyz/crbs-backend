@@ -25,8 +25,7 @@ public class LocationRepository {
         "name", AttributeValue.builder().s(location.getName()).build(),
         "city", AttributeValue.builder().s(location.getCity()).build(),
         "createdAt", AttributeValue.builder().s(location.getCreatedAt()).build(),
-        "updatedAt", AttributeValue.builder().s(location.getUpdatedAt()).build()
-    );
+        "updatedAt", AttributeValue.builder().s(location.getUpdatedAt()).build());
 
     PutItemRequest putItemRequest = PutItemRequest.builder()
         .tableName(tableName)
@@ -34,6 +33,32 @@ public class LocationRepository {
         .build();
 
     dynamoDbClient.putItem(putItemRequest);
+    return location;
+  }
+
+  public Location getLocationById(String locationId) {
+    Map<String, AttributeValue> key = Map.of(
+        "locationId", AttributeValue.builder().s(locationId).build());
+
+    software.amazon.awssdk.services.dynamodb.model.GetItemRequest getItemRequest = software.amazon.awssdk.services.dynamodb.model.GetItemRequest
+        .builder()
+        .tableName(tableName)
+        .key(key)
+        .build();
+
+    Map<String, AttributeValue> item = dynamoDbClient.getItem(getItemRequest).item();
+
+    if (item == null || item.isEmpty()) {
+      return null;
+    }
+
+    Location location = new Location();
+    location.setLocationId(item.get("locationId").s());
+    location.setName(item.get("name").s());
+    location.setCity(item.get("city").s());
+    location.setCreatedAt(item.get("createdAt").s());
+    location.setUpdatedAt(item.get("updatedAt").s());
+
     return location;
   }
 }

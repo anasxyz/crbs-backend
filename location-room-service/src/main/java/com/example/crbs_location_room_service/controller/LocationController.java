@@ -19,6 +19,11 @@ public class LocationController {
     return locationService.addLocation(location);
   }
 
+  @GetMapping("/location/{locationId}")
+  public Location getLocationById(@PathVariable String locationId) {
+    return locationService.getLocationById(locationId);
+  }
+
   @GetMapping("/status")
   public String status() {
     return "Ok\n";
