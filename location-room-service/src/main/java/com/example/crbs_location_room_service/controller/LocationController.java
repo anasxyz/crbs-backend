@@ -5,7 +5,6 @@ import com.example.crbs_location_room_service.service.LocationService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/location")
 public class LocationController {
 
   private final LocationService locationService;
@@ -15,12 +14,12 @@ public class LocationController {
   }
 
   // endpoint to create a location
-  @PostMapping
+  @PostMapping("/location")
   public Location createLocation(@RequestBody Location location) {
     return locationService.addLocation(location);
   }
 
-  @GetMapping
+  @GetMapping("/status")
   public String status() {
     return "Ok\n";
   }
