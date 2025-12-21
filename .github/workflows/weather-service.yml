@@ -1,11 +1,11 @@
-name: User Service CI/CD
+name: Weather Forecast Service CI/CD
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'user-service/**'
+      - 'weather-forecast-service/**'
 
 jobs:
   build-and-push:
