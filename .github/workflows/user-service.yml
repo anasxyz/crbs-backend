@@ -10,24 +10,28 @@ on:
 jobs:
   test:
       runs-on: ubuntu-latest
-      defaults:
-        run:
-          working-directory: ./user-service
       steps:
         - uses: actions/checkout@v4
+
         - name: set up python
           uses: actions/setup-python@v5
           with:
             python-version: '3.14'
+
         - name: install dependencies
           run: |
+            cd user-service
+            python -m pip install --upgrade pip
             pip install -r requirements.txt
+
         - name: run tests
           run: |
+            cd user-service
             export PYTHONPATH=$PYTHONPATH:.
-            pytest tests
+            pytest tests/
 
   build-and-push:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -53,5 +57,3 @@ jobs:
           cd user-service
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
-
