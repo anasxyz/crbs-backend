@@ -1,14 +1,19 @@
 import json
 import hashlib
 import random
+import base64
 
 
 def lambda_handler(event, context):
-  # log api gateway event
-  print(f"FULL EVENT: {json.dumps(event)}") 
+  print(f"FULL EVENT: {json.dumps(event)}")
+
+  body_str = event.get("body", "")
+
+  if event.get("isBase64Encoded"):
+    body_str = base64.b64decode(body_str).decode("utf-8")
 
   try:
-    body = json.loads(event.get("body", "{}"))
+    body = json.loads(body_str) if body_str else {}
   except json.JSONDecodeError:
     return {"statusCode": 400, "body": json.dumps({"error": "Invalid JSON"})}
 
@@ -26,14 +31,14 @@ def lambda_handler(event, context):
   rng = random.Random(seed)
   temperature = rng.randint(-5, 35)
 
-  response = {
-    "locationId": location,
-    "date": date,
-    "forecastedTemperatureC": temperature,
-  }
-
   return {
     "statusCode": 200,
     "headers": {"Content-Type": "application/json"},
-    "body": json.dumps(response),
+    "body": json.dumps(
+      {
+        "locationId": location,
+        "date": date,
+        "forecastedTemperatureC": temperature,
+      }
+    ),
   }
