@@ -22,24 +22,41 @@ class LocationControllerTest {
 
   @Test
   void testCreateLocation() {
-    // Arrange
     Location location = new Location();
-    location.setName("Main Campus");
+    location.setLocationId("LOC1");
+    location.setName("Main Hall");
+
     when(locationService.addLocation(location)).thenReturn(location);
 
-    // Act
     Location result = locationController.createLocation(location);
+    assertEquals("Main Hall", result.getName());
+  }
 
-    // Assert
-    assertEquals("Main Campus", result.getName());
+  @Test
+  void testGetLocationById() {
+    Location location = new Location();
+    location.setLocationId("LOC1");
+
+    when(locationService.getLocationById("LOC1")).thenReturn(location);
+
+    Location result = locationController.getLocationById("LOC1");
+    assertEquals("LOC1", result.getLocationId());
+  }
+
+  @Test
+  void testGetLocationByName() {
+    Location location = new Location();
+    location.setName("Main Hall");
+
+    when(locationService.getLocationByName("Main Hall")).thenReturn(location);
+
+    Location result = locationController.getLocationByName("Main Hall");
+    assertEquals("Main Hall", result.getName());
   }
 
   @Test
   void testStatus() {
-    // Act
     String result = locationController.status();
-
-    // Assert
     assertEquals("Ok\n", result);
   }
 }
