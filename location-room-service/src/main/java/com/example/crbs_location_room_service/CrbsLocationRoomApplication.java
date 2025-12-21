@@ -1,4 +1,4 @@
-package com.example.crbs_location_room;
+package com.example.crbs_location_room_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
