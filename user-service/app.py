@@ -8,6 +8,7 @@ TABLE_NAME = "Users"
 
 
 # POST: create user
+# TODO: remove, will probably go unused
 @app.route("/user", methods=["POST"])
 def create_user():
   data = request.json
