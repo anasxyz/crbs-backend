@@ -5,9 +5,9 @@ from moto import mock_aws
 from app import app
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture(scope="session", autouse=True)
 def aws_credentials():
-  """mock aws credentials for moto"""
+  """mocked aws credentials for moto."""
   os.environ["AWS_ACCESS_KEY_ID"] = "testing"
   os.environ["AWS_SECRET_ACCESS_KEY"] = "testing"
   os.environ["AWS_SECURITY_TOKEN"] = "testing"
@@ -18,6 +18,7 @@ def aws_credentials():
 @pytest.fixture
 def setup_dynamo(aws_credentials):
   with mock_aws():
+    # This now uses the dummy credentials set above
     conn = boto3.client("dynamodb", region_name="us-east-1")
     conn.create_table(
       TableName="Users",
