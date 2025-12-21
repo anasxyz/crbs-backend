@@ -13,17 +13,25 @@ public class LocationController {
     this.locationService = locationService;
   }
 
-  // endpoint to create a location
+  // create a location
   @PostMapping("/location")
   public Location createLocation(@RequestBody Location location) {
     return locationService.addLocation(location);
   }
 
+  // get location by id
   @GetMapping("/location/{locationId}")
   public Location getLocationById(@PathVariable String locationId) {
     return locationService.getLocationById(locationId);
   }
 
+  // get location by name
+  @GetMapping("/location/name/{name}")
+  public Location getLocationByName(@PathVariable String name) {
+    return locationService.getLocationByName(name);
+  }
+
+  // service status
   @GetMapping("/status")
   public String status() {
     return "Ok\n";

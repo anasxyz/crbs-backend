@@ -61,4 +61,32 @@ public class LocationRepository {
 
     return location;
   }
+
+  public Location getLocationByName(String name) {
+    software.amazon.awssdk.services.dynamodb.model.ScanRequest scanRequest = software.amazon.awssdk.services.dynamodb.model.ScanRequest
+        .builder()
+        .tableName(tableName)
+        .filterExpression("#n = :val")
+        .expressionAttributeNames(Map.of("#n", "name"))
+        .expressionAttributeValues(Map.of(
+            ":val", AttributeValue.builder().s(name).build()))
+        .build();
+
+    var response = dynamoDbClient.scan(scanRequest);
+
+    if (!response.hasItems() || response.items().isEmpty()) {
+      return null;
+    }
+
+    Map<String, AttributeValue> item = response.items().get(0);
+
+    Location location = new Location();
+    location.setLocationId(item.get("locationId").s());
+    location.setName(item.get("name").s());
+    location.setCity(item.get("city").s());
+    location.setCreatedAt(item.get("createdAt").s());
+    location.setUpdatedAt(item.get("updatedAt").s());
+
+    return location;
+  }
 }
