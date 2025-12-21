@@ -6,7 +6,8 @@ public class Room {
   private String locationId;
   private String roomId;
   private String roomName;
-  private String capacity;
+  private Integer capacity;
+  private Float basePrice;
   private String createdAt;
   private String updatedAt;
 
@@ -23,8 +24,12 @@ public class Room {
     return roomName;
   }
 
-  public String getCapacity() {
+  public Integer getCapacity() {
     return capacity;
+  }
+
+  public Float getBasePrice() {
+    return basePrice;
   }
 
   public String getCreatedAt() {
@@ -48,8 +53,12 @@ public class Room {
     this.roomName = roomName;
   }
 
-  public void setCapacity(String capacity) {
+  public void setCapacity(Integer capacity) {
     this.capacity = capacity;
+  }
+
+  public void setBasePrice(Float basePrice) {
+    this.basePrice = basePrice;
   }
 
   public void setCreatedAt(String createdAt) {
