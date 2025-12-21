@@ -28,7 +28,7 @@ jobs:
       - name: build image and push to ecr
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: weather-service
+          ECR_REPOSITORY: weather-forecast-service
           IMAGE_TAG: latest
         run: |
           cd weather-forecast-service
