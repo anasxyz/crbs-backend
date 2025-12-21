@@ -1,11 +1,11 @@
-name: Booking Service CI/CD
+name: Location / Room Service CI/CD
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'booking-service/**'
+      - 'location-room-service/**'
 
 jobs:
   build-and-push:
@@ -34,3 +34,4 @@ jobs:
           cd booking-service
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
