@@ -8,6 +8,28 @@ on:
       - 'user-service/**'
 
 jobs:
+  test:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: set up python
+          uses: actions/setup-python@v5
+          with:
+            python-version: '3.14'
+
+        - name: install dependencies
+          run: |
+            cd user-service
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+
+        - name: run tests
+          run: |
+            cd user-service
+            export PYTHONPATH=$PYTHONPATH:.
+            pytest tests/
+
   build-and-push:
     runs-on: ubuntu-latest
     steps:
