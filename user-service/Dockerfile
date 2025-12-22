@@ -13,4 +13,4 @@ COPY . .
 
 EXPOSE 8081
 
-CMD ["python", "app.py"]
+CMD ["python", "app.py", "--host=0.0.0.0", "--port=8081"]

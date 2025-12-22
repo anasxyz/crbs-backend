@@ -44,4 +44,5 @@ def get_user(user_id):
 
 
 if __name__ == "__main__":
-  app.run(port=8081, debug=True)
+  # run host at 0.0.0.0 to make it accessible from outside
+  app.run(host="0.0.0.0", port=8081, debug=True)
