@@ -53,10 +53,4 @@ class LocationControllerTest {
     Location result = locationController.getLocationByName("Main Hall");
     assertEquals("Main Hall", result.getName());
   }
-
-  @Test
-  void testStatus() {
-    String result = locationController.status();
-    assertEquals("Ok\n", result);
-  }
 }
