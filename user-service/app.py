@@ -43,6 +43,14 @@ def get_user(user_id):
   return jsonify(user), 200
 
 
+@app.route("/health", methods=["GET"])
+def health():
+  return "healthy", 200
+
+@app.route("/", methods=["GET"])
+def health2():
+  return "healthy", 200
+
 if __name__ == "__main__":
   # run host at 0.0.0.0 to make it accessible from outside
   app.run(host="0.0.0.0", port=8080, debug=True)

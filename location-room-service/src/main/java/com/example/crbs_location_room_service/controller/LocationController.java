@@ -2,6 +2,8 @@ package com.example.crbs_location_room_service.controller;
 
 import com.example.crbs_location_room_service.model.Location;
 import com.example.crbs_location_room_service.service.LocationService;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,9 +33,13 @@ public class LocationController {
     return locationService.getLocationByName(name);
   }
 
-  // service status
-  @GetMapping("/status")
-  public String status() {
-    return "Ok\n";
+  @GetMapping("/health")
+  public ResponseEntity<String> health() {
+    return ResponseEntity.ok("healthy");
+  }
+
+  @GetMapping("/")
+  public ResponseEntity<String> health2() {
+    return ResponseEntity.ok("healthy");
   }
 }

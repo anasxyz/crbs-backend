@@ -5,6 +5,7 @@ import com.example.crbs_booking_service.service.BookingService;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,7 +17,7 @@ public class BookingController {
     this.bookingService = bookingService;
   }
 
-  // endpoint to create a booking 
+  // endpoint to create a booking
   @PostMapping("/booking/new")
   public Booking createBooking(@RequestBody Booking booking) {
     return bookingService.createBooking(booking);
@@ -34,8 +35,13 @@ public class BookingController {
     return bookingService.getAllBookings();
   }
 
-  @GetMapping("/status")
-  public String status() {
-    return "Ok\n";
+  @GetMapping("/health")
+  public ResponseEntity<String> health() {
+    return ResponseEntity.ok("healthy");
+  }
+
+  @GetMapping("/")
+  public ResponseEntity<String> health2() {
+    return ResponseEntity.ok("healthy");
   }
 }
