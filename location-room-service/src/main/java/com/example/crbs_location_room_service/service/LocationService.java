@@ -2,6 +2,9 @@ package com.example.crbs_location_room_service.service;
 
 import com.example.crbs_location_room_service.model.Location;
 import com.example.crbs_location_room_service.repository.LocationRepository;
+
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,5 +25,9 @@ public class LocationService {
 
   public Location getLocationByName(String name) {
     return locationRepository.getLocationByName(name);
+  }
+
+  public List<Location> getAllLocations() {
+    return locationRepository.getAllLocations();
   }
 }

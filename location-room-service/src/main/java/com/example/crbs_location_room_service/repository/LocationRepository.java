@@ -5,6 +5,7 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -88,5 +89,26 @@ public class LocationRepository {
     location.setUpdatedAt(item.get("updatedAt").s());
 
     return location;
+  }
+
+  public List<Location> getAllLocations() {
+    software.amazon.awssdk.services.dynamodb.model.ScanRequest scanRequest = software.amazon.awssdk.services.dynamodb.model.ScanRequest
+        .builder()
+        .tableName(tableName)
+        .build();
+
+    var response = dynamoDbClient.scan(scanRequest);
+
+    return response.items().stream()
+        .map(item -> {
+          Location location = new Location();
+          location.setLocationId(item.get("locationId").s());
+          location.setName(item.get("name").s());
+          location.setCity(item.get("city").s());
+          location.setCreatedAt(item.get("createdAt").s());
+          location.setUpdatedAt(item.get("updatedAt").s());
+          return location;
+        })
+        .collect(java.util.stream.Collectors.toList());
   }
 }

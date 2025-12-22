@@ -3,6 +3,8 @@ package com.example.crbs_location_room_service.controller;
 import com.example.crbs_location_room_service.model.Location;
 import com.example.crbs_location_room_service.service.LocationService;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +33,12 @@ public class LocationController {
   @GetMapping("/location/name/{name}")
   public Location getLocationByName(@PathVariable String name) {
     return locationService.getLocationByName(name);
+  }
+
+  // get all locations
+  @GetMapping("/location/all")
+  public List<Location> getAllLocations() {
+    return locationService.getAllLocations();
   }
 
   @GetMapping("/health")

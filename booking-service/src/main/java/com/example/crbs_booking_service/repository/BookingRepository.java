@@ -87,4 +87,17 @@ public class BookingRepository {
     booking.setUpdatedAt(java.time.Instant.parse(item.get("updatedAt").s()));
     return booking;
   }
+
+  public List<Booking> getBookingsByUserId(String userId) {
+    ScanRequest scanRequest = ScanRequest.builder()
+        .tableName(tableName)
+        .filterExpression("userId = :uid")
+        .expressionAttributeValues(Map.of(
+            ":uid", AttributeValue.builder().s(userId).build()))
+        .build();
+
+    return dynamoDbClient.scan(scanRequest).items().stream()
+        .map(this::mapToBooking)
+        .collect(Collectors.toList());
+  }
 }

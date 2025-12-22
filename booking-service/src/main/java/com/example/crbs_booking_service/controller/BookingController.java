@@ -35,6 +35,12 @@ public class BookingController {
     return bookingService.getAllBookings();
   }
 
+  // endpoint to get bookings by userId
+  @GetMapping("/booking/user/{userId}")
+  public List<Booking> getBookingsByUserId(@PathVariable String userId) {
+    return bookingService.getBookingsByUserId(userId);
+  }
+
   @GetMapping("/health")
   public ResponseEntity<String> health() {
     return ResponseEntity.ok("healthy");

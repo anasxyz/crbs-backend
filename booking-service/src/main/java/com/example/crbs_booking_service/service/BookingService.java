@@ -17,12 +17,6 @@ public class BookingService {
   }
 
   public Booking createBooking(Booking booking) {
-    // calculate final price (basePrice + operationalCost)
-    // opertionalCost will come from somewher else
-    // will probably have to change this later
-    double finalPrice = booking.getBasePrice() + booking.getOperationalCost();
-    booking.setFinalPrice(finalPrice);
-
     // set status to booked
     booking.setStatus("booked");
 
@@ -36,5 +30,9 @@ public class BookingService {
 
   public List<Booking> getAllBookings() {
     return bookingRepository.getAllBookings();
+  }
+
+  public List<Booking> getBookingsByUserId(String userId) {
+    return bookingRepository.getBookingsByUserId(userId);
   }
 }
