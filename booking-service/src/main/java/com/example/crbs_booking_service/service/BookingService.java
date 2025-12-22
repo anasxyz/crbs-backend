@@ -2,6 +2,9 @@ package com.example.crbs_booking_service.service;
 
 import com.example.crbs_booking_service.model.Booking;
 import com.example.crbs_booking_service.repository.BookingRepository;
+
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,5 +28,13 @@ public class BookingService {
 
     // save to dynamodb
     return bookingRepository.addBooking(booking);
+  }
+
+  public Booking getBookingById(String bookingId) {
+    return bookingRepository.getBookingById(bookingId);
+  }
+
+  public List<Booking> getAllBookings() {
+    return bookingRepository.getAllBookings();
   }
 }
