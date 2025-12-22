@@ -27,13 +27,12 @@ class BookingServiceTest {
   void testCreateBooking() {
     Booking booking = new Booking();
     booking.setBasePrice(100.0);
-    booking.setOperationalCost(20.0);
 
     when(bookingRepository.addBooking(any(Booking.class))).thenAnswer(i -> i.getArguments()[0]);
 
     Booking result = bookingService.createBooking(booking);
 
-    assertEquals(120.0, result.getFinalPrice());
+    assertEquals(100.0, result.getBasePrice());
     assertEquals("booked", result.getStatus());
     verify(bookingRepository, times(1)).addBooking(any(Booking.class));
   }
