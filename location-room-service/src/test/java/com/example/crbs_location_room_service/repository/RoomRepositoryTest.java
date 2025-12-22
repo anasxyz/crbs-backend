@@ -8,12 +8,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.*;
 
+import com.example.crbs_location_room_service.BaseIntegrationTest;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class RoomRepositoryTest {
+class RoomRepositoryTest extends BaseIntegrationTest {
 
   @Autowired
   private RoomRepository roomRepository;
