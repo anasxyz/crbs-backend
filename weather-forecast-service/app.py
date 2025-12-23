@@ -3,16 +3,17 @@ import hashlib
 import random
 import base64
 
-
 CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "*",
-  "Access-Control-Allow-Methods": "*",
+  "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key",
+  "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
 }
 
 
 def lambda_handler(event, context):
-  if event.get("httpMethod") == "OPTIONS":
+  method = event.get("httpMethod", "").upper()
+
+  if method == "OPTIONS":
     return {"statusCode": 200, "headers": CORS_HEADERS, "body": ""}
 
   body_str = event.get("body", "")
