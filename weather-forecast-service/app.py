@@ -11,15 +11,21 @@ CORS_HEADERS = {
 
 
 def lambda_handler(event, context):
-  method = event.get("httpMethod", "").upper()
+  method = (
+    event.get("httpMethod")
+    or event.get("requestContext", {}).get("http", {}).get("method")
+    or ""
+  ).upper()
 
   if method == "OPTIONS":
     return {"statusCode": 200, "headers": CORS_HEADERS, "body": ""}
 
   body_str = event.get("body", "")
-
   if event.get("isBase64Encoded"):
-    body_str = base64.b64decode(body_str).decode("utf-8")
+    try:
+      body_str = base64.b64decode(body_str).decode("utf-8")
+    except Exception:
+      pass
 
   try:
     body = json.loads(body_str) if body_str else {}
@@ -37,7 +43,13 @@ def lambda_handler(event, context):
     return {
       "statusCode": 400,
       "headers": CORS_HEADERS,
-      "body": json.dumps({"error": "Missing locationId or date", "received": body}),
+      "body": json.dumps(
+        {
+          "error": "Missing locationId or date",
+          "received": body,
+          "note": "Ensure you are sending a JSON body with locationId and date",
+        }
+      ),
     }
 
   seed_str = f"{location}-{date}"
