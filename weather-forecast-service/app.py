@@ -4,7 +4,17 @@ import random
 import base64
 
 
+CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "*",
+  "Access-Control-Allow-Methods": "*",
+}
+
+
 def lambda_handler(event, context):
+  if event.get("httpMethod") == "OPTIONS":
+    return {"statusCode": 200, "headers": CORS_HEADERS, "body": ""}
+
   body_str = event.get("body", "")
 
   if event.get("isBase64Encoded"):
@@ -13,7 +23,11 @@ def lambda_handler(event, context):
   try:
     body = json.loads(body_str) if body_str else {}
   except json.JSONDecodeError:
-    return {"statusCode": 400, "body": json.dumps({"error": "Invalid JSON"})}
+    return {
+      "statusCode": 400,
+      "headers": CORS_HEADERS,
+      "body": json.dumps({"error": "Invalid JSON"}),
+    }
 
   location = body.get("locationId")
   date = body.get("date")
@@ -21,6 +35,7 @@ def lambda_handler(event, context):
   if not location or not date:
     return {
       "statusCode": 400,
+      "headers": CORS_HEADERS,
       "body": json.dumps({"error": "Missing locationId or date", "received": body}),
     }
 
@@ -31,7 +46,7 @@ def lambda_handler(event, context):
 
   return {
     "statusCode": 200,
-    "headers": {"Content-Type": "application/json"},
+    "headers": {**CORS_HEADERS, "Content-Type": "application/json"},
     "body": json.dumps(
       {
         "locationId": location,
