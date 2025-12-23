@@ -1,11 +1,13 @@
 from flask import Flask, request, jsonify
 import boto3
 import uuid
+from flask_cors import CORS
 
 app = Flask(__name__)
 dynamodb = boto3.client("dynamodb", region_name="us-east-1")
 TABLE_NAME = "Users"
 
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # POST: create user
 # TODO: remove, will probably go unused
