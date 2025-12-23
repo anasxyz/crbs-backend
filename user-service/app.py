@@ -29,7 +29,6 @@ def create_user():
   return jsonify({"userId": user_id, "status": "created"}), 201
 
 
-# GET: get user by userId
 @app.route("/user/<user_id>", methods=["GET"])
 def get_user(user_id):
   response = dynamodb.get_item(TableName=TABLE_NAME, Key={"userId": {"S": user_id}})
